@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="header">
-			<text class="close">←</text>
+			<text class="close" @click="goLogin">←</text>
 			<text class="register">×</text>
 		</view>
 
@@ -14,16 +14,17 @@
 			<text class="tip">您好，欢迎来到 yike !</text>
 			<view class="form">
 				<view>
-					<input type="text" placeholder="请输入用户名">
-					<text class="tip">用户名已有</text>
+					<input type="text" placeholder="请输入用户名" v-model="username">
+					<text class="tip" v-show="validUser">用户名已有</text>
 				</view>
 				<view>
-					<input type="email" placeholder="请输入邮箱">
-					<text class="state">✔</text>
+					<input type="email" placeholder="请输入邮箱" v-model="email">
+					<text class="state" v-show="validEmail">✔</text>
 				</view>
 				<view>
-					<input type="password" placeholder="请输入密码">
-					<text class="eye">👀</text>
+					<input type="password" v-if="!isPassShow" placeholder="请输入密码" v-model="password">
+					<input type="text" v-else placeholder="请输入密码" v-model="password">
+					<text class="eye" @click="isPassShow=!isPassShow">👀</text>
 				</view>
 			</view>
 
@@ -33,6 +34,30 @@
 </template>
 
 <script>
+	export default {
+		data() {
+			return {
+				username: '',
+				email: '',
+				password: '',
+				isPassShow: false
+			}
+		},
+		computed: {
+			validUser() {
+				return false
+			},
+			validEmail() {
+				const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+				return regex.test(this.email);
+			},
+			goLogin() {
+				uni.navigateBack({
+					delta: 1
+				})
+			}
+		}
+	}
 </script>
 
 <style scoped lang="scss">
