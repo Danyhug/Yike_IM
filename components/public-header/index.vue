@@ -17,6 +17,7 @@
 
 <style>
 	.header {
+		font-size: 36rpx;
 		position: fixed;
 		top: 0;
 		left: 0;
