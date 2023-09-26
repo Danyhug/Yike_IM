@@ -81,7 +81,7 @@
 				}
 
 				.title {
-					width: 3.6em;
+					width: 3.4em;
 					color: #333;
 				}
 

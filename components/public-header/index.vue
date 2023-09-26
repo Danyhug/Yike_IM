@@ -1,7 +1,8 @@
 <template>
 	<view class="header">
 		<text class="close">←</text>
-		<text class="register">···</text>
+		<slot></slot>
+		<text class="register" style="font-weight: bold;">···</text>
 	</view>
 </template>
 
@@ -26,7 +27,8 @@
 		padding: 0 32rpx;
 		display: flex;
 		justify-content: space-between;
-		line-height: 60rpx;
-		font-weight: bold;
+		line-height: 100rpx;
+		background-color: #fff;
+		z-index: 999;
 	}
 </style>

@@ -8,6 +8,10 @@ App.mpType = 'app'
 const app = new Vue({
   ...App
 })
+
+import Header from './components/public-header/index.vue'
+Vue.component('Header', Header)
+
 app.$mount()
 // #endif
 
