@@ -17,6 +17,19 @@
 					<view class="list-content">遥遥领先</view>
 					<image src="../../static/tx.png" mode=""></image>
 				</view>
+				
+				<!-- 对方说话 -->
+				<view class="chat-list list-you">
+					<image src="../../static/lei.jpg" mode=""></image>
+					<view class="list-content">
+						你看我帅吗
+						<image src="../../static/lei.jpg" mode=""></image>
+					</view>
+				</view>
+			</view>
+			
+			<view class="chat-input">
+				
 			</view>
 		</view>
 	</view>
@@ -59,7 +72,7 @@
 				align-items: flex-start;
 				margin-bottom: 36rpx;
 
-				image {
+				&>image {
 					width: 80rpx;
 					height: 80rpx;
 					border-radius: 12rpx;
@@ -72,6 +85,12 @@
 					border-radius: $uni-border-radius-base;
 					border-top-left-radius: 0;
 					font-size: 20rpx;
+					
+					&>image {
+						margin: 0 20rpx;
+						vertical-align: text-top;
+						max-height: 320rpx;
+					}
 				}
 
 				&.list-you {
@@ -93,6 +112,11 @@
 					}
 				}
 			}
+		}
+		
+		.chat-input {
+			height: 120rpx;
+			background-color: red;
 		}
 	}
 </style>
