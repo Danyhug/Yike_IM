@@ -14,143 +14,120 @@
 
 				<!-- 我说话 -->
 				<view class="chat-list list-me" v-for="item in 3">
-					<view class="list-content">遥遥领先</view>
+					<view class="list-content">遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先遥遥领先
+					</view>
 					<image src="../../static/tx.png" mode=""></image>
 				</view>
 
 				<!-- 对方说话 -->
 				<view class="chat-list list-you">
 					<image src="../../static/lei.jpg" mode=""></image>
-					<view class="list-content">
-						你看我帅吗
+					<view class="list-content list-content-image">
 						<image src="../../static/lei.jpg" mode=""></image>
 					</view>
 				</view>
 			</view>
 
 			<view class="chat-input">
-				<image src="../../static/语音.png" mode="" class="voice"></image>
-				<input type="text">
-				<image src="../../static/表情.png" mode="" class="express"></image>
-				<image src="../../static/添加.png" mode="" class="add"></image>
+				<view class="chat-input-top">
+					<view class="voice">
+						<image src="../../static/语音.png" mode="" @click="isUseVoice=!isUseVoice"></image>
+					</view>
+
+					<view class="inp">
+						<input type="text" v-model="chatInput" v-show="!isUseVoice" ref="content">
+						<text v-show="isUseVoice">按住&nbsp;说话</text>
+					</view>
+
+					<view class="express" @click="isShowEmoji=!isShowEmoji">
+						<image src="../../static/表情.png" mode=""></image>
+					</view>
+
+					<view class="add" v-show="inputIsNull">
+						<image src="../../static/添加.png" mode=""></image>
+					</view>
+					<view class="send" v-show="!inputIsNull">
+						<text>发送</text>
+					</view>
+				</view>
+
+				<view class="chat-input-bottom" v-show="isShowEmoji">
+					<Emoji @sendMsg='addContent' @click="addMsg" v-show="isShowEmoji"></Emoji>
+					<!-- 					<view class="lists">
+						<view class="list">
+							<image src="../../static/视频@3x.png" mode=""></image>
+						</view>
+						<view class="list">
+							<image src="../../static/相机@3x.png" mode=""></image>
+						</view>
+						<view class="list">
+							<image src="../../static/语音@3x.png" mode=""></image>
+						</view>
+						<view class="list">
+							<image src="../../static/语音@3x.png" mode=""></image>
+						</view>
+					</view> -->
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import Emoji from '../../components/emoji/emoji.vue'
+
 	export default {
 		data() {
 			return {
-				uname: '开心就好'
+				uname: '开心就好',
+				// 聊天输入框内容
+				chatInput: '',
+				// 是否使用语音
+				isUseVoice: false,
+				// 是否展示表情页
+				isShowEmoji: false,
+				// 用户信息
+				uid: null,
+				uname: '',
+				msgs: []
 			}
 		},
+		components: {
+			Emoji
+		},
+		computed: {
+			// 输入框是否为空
+			inputIsNull() {
+				return this.chatInput.length === 0
+			}
+		},
+		methods: {
+			// 添加文本内容
+			addMsg() {
+				// 获取光标位置
+				const input = this.$refs.content
+				const startPos = input.value.slice(0, input.selectionStart).lastIndexOf('\n') + 1;
+				const endPos = input.selectionStart;
+				console.log(`光标开始位置: ${startPos}, 光标结束位置: ${endPos}`);
+			},
+			/**
+			 * @param {Object} v: 要添加的值
+			 */
+			addContent(v) {
+				// 添加内容
+				this.chatInput += v
+			},
+			// 解析用户的信息
+			resolveUserInfo() {
+
+			}
+		},
+		mounted() {
+			this.resolveUserInfo()
+		}
 	}
 </script>
 
-
 <style lang="scss">
-	.content {
-		padding: 0 32rpx;
-		min-height: 100vh;
-		background-color: rgb(245, 245, 245);
-	}
-
-	.main {
-		margin-top: 100rpx;
-
-		.chat-lists {
-			display: flex;
-			flex-direction: column;
-
-			.date-mark {
-				text-align: center;
-				color: $uni-text-color-grey;
-				margin: 36rpx 0;
-			}
-
-
-			.chat-list {
-				display: flex;
-				align-items: flex-start;
-				margin-bottom: 36rpx;
-
-				&>image {
-					width: 80rpx;
-					height: 80rpx;
-					border-radius: 12rpx;
-				}
-
-				.list-content {
-					min-height: 66rpx;
-					padding: 12rpx 20rpx;
-					background-color: #fff;
-					border-radius: $uni-border-radius-base;
-					border-top-left-radius: 0;
-					font-size: 20rpx;
-
-					&>image {
-						margin: 0 20rpx;
-						vertical-align: text-top;
-						max-height: 320rpx;
-					}
-				}
-
-				&.list-you {
-					align-self: flex-start;
-					padding-right: 160rpx;
-
-					.list-content {
-						margin-left: 18rpx;
-					}
-				}
-
-				&.list-me {
-					align-self: flex-end;
-					padding-left: 160rpx;
-
-					.list-content {
-						margin-right: 18rpx;
-						background-color: $uni-color-primary;
-					}
-				}
-			}
-		}
-
-		.chat-input {
-			padding: 0 32rpx;
-			height: 120rpx;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			position: fixed;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			background-color: rgb(245, 245, 245);
-
-			>* {
-				margin-right: 22rpx;
-			}
-
-			.add {
-				margin-right: 0;
-			}
-
-			input {
-				padding: 0 22rpx;
-				flex: 1;
-				background-color: #fff;
-				border-radius: $uni-border-radius-base;
-				height: 72rpx;
-				font-size: $uni-font-size-base;
-				line-height: 72rpx;
-			}
-
-			image {
-				width: 56rpx;
-				height: 56rpx;
-			}
-		}
-	}
+	@import "./css/style.scss";
 </style>
