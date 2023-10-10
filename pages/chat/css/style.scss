@@ -10,7 +10,8 @@ $tx-size: 80rpx;
 $tx-content-padding: 18rpx;
 
 .main {
-	margin-top: 100rpx;
+	padding-top: 100rpx;
+	overflow-y: auto;
 
 	.chat-lists {
 		display: flex;
@@ -33,6 +34,20 @@ $tx-content-padding: 18rpx;
 				width: $tx-size;
 				height: $tx-size;
 				border-radius: 12rpx;
+			}
+			
+			.list-content-voice {
+				view {
+					color: #555;
+					font-size: $uni-font-size-base;
+				}
+				
+				image {
+					$width: 76rpx;
+					width: $width;
+					height: $width / 2;
+					vertical-align: middle;
+				}
 			}
 
 			.list-content {
@@ -77,12 +92,12 @@ $tx-content-padding: 18rpx;
 		}
 	}
 
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-
 	.chat-input {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		
 		.chat-input-top {
 			padding: 0 32rpx;
 			height: 120rpx;
