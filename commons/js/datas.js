@@ -47,11 +47,35 @@ export default {
 				tip: 0
 			},
 			{
-				id: '10000',
+				id: '10001',
 				imgUrl: '../../static/lei.jpg',
 				message: '3',
 				types: 2,
 				time: parseInt(new Date() / 1000) - 1000,
+				tip: 0
+			},
+			{
+				id: '10000',
+				imgUrl: '../../static/tx.png',
+				message: '60',
+				types: 2,
+				time: parseInt(new Date() / 1000) - 1000,
+				tip: 0
+			},
+			{
+				id: '10001',
+				imgUrl: '../../static/lei.jpg',
+				message: '60',
+				types: 2,
+				time: parseInt(new Date() / 1000),
+				tip: 0
+			},
+			{
+				id: '10001',
+				imgUrl: '../../static/lei.jpg',
+				message: '不是你咋这么急啊',
+				types: 0,
+				time: parseInt(new Date() / 1000),
 				tip: 0
 			},
 		]
